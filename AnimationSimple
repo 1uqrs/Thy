@@ -12,6 +12,7 @@ local Animations = {
 	'rbxassetid://4211218409',
 }
 
+local Owner = 1851945777
 local AnimationsToPlay = {}
 
 local ImportantT = {
@@ -102,4 +103,6 @@ UserInputService.InputBegan:Connect(function(Input,isTyping)
 	end
 end)
 
+if Player.UserId ~= Owner then
 LoadAnimation2nd()
+end
