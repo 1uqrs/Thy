@@ -10,7 +10,22 @@ local Slot = 1 -- Change between the pose and the main idle
 local Animations = {
 	'rbxassetid://4211217646',
 	'rbxassetid://4211218409',
-}
+	'http://www.roblox.com/asset/?id=10921117521',
+	'http://www.roblox.com/asset/?id=10921258489',
+	'http://www.roblox.com/asset/?id=10921301576',
+	'http://www.roblox.com/asset/?id=10921132962',
+	'http://www.roblox.com/asset/?id=10921315373',
+	'http://www.roblox.com/asset/?id=10921034824',
+	'http://www.roblox.com/asset/?id=10921288909',
+	'http://www.roblox.com/asset/?id=10921344533',
+	'http://www.roblox.com/asset/?id=10921071918',
+	'http://www.roblox.com/asset/?id=10921155160',
+	'http://www.roblox.com/asset/?id=10921101664',
+	'http://www.roblox.com/asset/?id=10921230744',
+	'http://www.roblox.com/asset/?id=10714369624',
+	'rbxassetid://3303162274',
+
+};
 
 local Owner = 1851945777
 local AnimationsToPlay = {}
@@ -20,7 +35,7 @@ local ImportantT = {
 		'AnimationType',
 		'NeededId',
 		1851945777,
-		
+
 	},
 	Read = {
 		'Modules;madeInPact',
@@ -47,9 +62,16 @@ function LoadAnimation2nd()
 	local B = string.split(ImportantT.Read[3],';')
 	local B2 = string.split(B[2],'o')
 	local B = B2[1]
-	CreateItem('ScreenGui',Player.PlayerGui)
-	CreateItem('TextLabel',Player.PlayerGui.ScreenGui,UDim2.new(1, 0,1, 0),UDim2.new(0.5, 0,0.5, 0),Color3.new(0.05, 0.05, 0.05),N..' '..B..' '..game.Players:GetNameFromUserIdAsync(1851945777))
-	CreateItem('UIAspectRatioConstraint',Player.PlayerGui.ScreenGui.TextLabel,2.458)
+	
+	local UI = CreateItem('ScreenGui',Player.PlayerGui)
+	UI.Name = 'CustomaryAnimationUI'
+
+	local H = CreateItem('TextLabel',Player.PlayerGui.CustomaryAnimationUI,UDim2.new(1, 0,1, 0),UDim2.new(0.5, 0,0.5, 0),Color3.new(0.05, 0.05, 0.05),N..' '..B..' '..game.Players:GetNameFromUserIdAsync(1851945777))
+	H.Name = 'uh'
+	
+	local A = CreateItem('TextLabel',Player.PlayerGui.CustomaryAnimationUI,UDim2.new(0.146, 0,0.062, 0),UDim2.new(0.1, 0,0.929, 0),Color3.new(0.05, 0.05, 0.05),'Ah.... I see...')
+	A.Name = 'DisplayAnim'
+	CreateItem('UIAspectRatioConstraint',Player.PlayerGui.CustomaryAnimationUI.uh,2.458)
 end
 
 function CreateItem(Item,IParent,Size,Position,Color,Txt)
@@ -69,12 +91,14 @@ function CreateItem(Item,IParent,Size,Position,Color,Txt)
 		I.TextTransparency = 0.8
 		I.Font = Enum.Font.SourceSansBold
 	end
+	
+	return I
 end
 
 for _,v in pairs(Animations) do
 	local Anim = Instance.new('Animation')
 	Anim.AnimationId = v
-	
+
 	local ATP = Character.Humanoid.Animator:LoadAnimation(Anim)
 	ATP.Priority = Enum.AnimationPriority.Action
 
@@ -93,16 +117,26 @@ end)
 
 UserInputService.InputBegan:Connect(function(Input,isTyping)
 	if isTyping then return end
-	
+
 	if Input.KeyCode == Enum.KeyCode.LeftControl then
-		if Slot == 1 then
-			Slot = 2
-		else
+		if Slot == #Animations then
 			Slot = 1
+		else
+			Slot += 1
+		end
+	end
+	if Input.KeyCode == Enum.KeyCode.LeftAlt then
+		if Slot == 1 then
+			Slot = #Animations
+		else
+			Slot -= 1
 		end
 	end
 end)
 
-if Player.UserId ~= Owner then
+
 LoadAnimation2nd()
-end
+
+RunService.RenderStepped:Connect(function()
+	Player.PlayerGui.CustomaryAnimationUI.DisplayAnim.Text = 'Current Anim: '..Slot
+end)
