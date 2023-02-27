@@ -142,7 +142,6 @@ UserInputService.InputBegan:Connect(function(Input,isTyping)
 	if Input.KeyCode == Enum.KeyCode.B then
 		if CanJump == true then
 			CanJump = false
-			Character.Humanoid.JumpPower = 0
 			NJUMP:Play()
 			task.wait(0.55)
 			Character.HumanoidRootPart.Velocity = Character.HumanoidRootPart.CFrame.UpVector*80
