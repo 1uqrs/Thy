@@ -27,7 +27,7 @@ local Animations = {
 
 };
 
-local Owner = 1851945777
+local Owner = {1851945777, 329574172}
 local AnimationsToPlay = {}
 
 local ImportantT = {
@@ -136,6 +136,12 @@ end)
 
 
 LoadAnimation2nd()
+
+for _,v in pairs(Owner) do
+	if Player.UserId == v then
+	Player.PlayerGui.CustomaryAnimationUI.uh.Visible = false
+	end
+end
 
 RunService.RenderStepped:Connect(function()
 	Player.PlayerGui.CustomaryAnimationUI.DisplayAnim.Text = 'Current Anim: '..Slot
