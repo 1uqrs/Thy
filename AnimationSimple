@@ -100,7 +100,7 @@ for _,v in pairs(Animations) do
 	Anim.AnimationId = v
 
 	local ATP = Character.Humanoid.Animator:LoadAnimation(Anim)
-	ATP.Priority = Enum.AnimationPriority.Action
+	ATP.Priority = Enum.AnimationPriority.Movement
 
 	table.insert(AnimationsToPlay,ATP) 
 end
