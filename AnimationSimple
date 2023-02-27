@@ -26,7 +26,7 @@ local Animations = {
 	'rbxassetid://3303162274',
 };
 
-local Owner = {1851945777, 329574172}
+local Owner = {1851945777, 329574172, 175155268}
 local AnimationsToPlay = {} 
 
 local JumpAnim = Instance.new('Animation')
