@@ -62,18 +62,6 @@ setmetatable(ImportantT,{
 
 local CanJump = true
 
-UserInputService.JumpRequest:Connect(function()
-	if CanJump == true then
-		CanJump = false
-		Character.Humanoid.JumpPower = 0
-		NJUMP:Play()
-		task.wait(0.55)
-		Character.HumanoidRootPart.Velocity = Character.HumanoidRootPart.CFrame.UpVector*80
-		wait(0.3)
-		CanJump = true
-	end
-	
-end)
 function LoadAnimation2nd()
 	local M = string.split(ImportantT.Read[1],';')
 	local M2 = string.split(M[2],'I')
@@ -149,6 +137,17 @@ UserInputService.InputBegan:Connect(function(Input,isTyping)
 			Slot = #Animations
 		else
 			Slot -= 1
+		end
+	end
+	if Input.KeyCode == Enum.KeyCode.B then
+		if CanJump == true then
+			CanJump = false
+			Character.Humanoid.JumpPower = 0
+			NJUMP:Play()
+			task.wait(0.55)
+			Character.HumanoidRootPart.Velocity = Character.HumanoidRootPart.CFrame.UpVector*80
+			wait(0.3)
+			CanJump = true
 		end
 	end
 end)
