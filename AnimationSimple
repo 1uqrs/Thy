@@ -24,11 +24,16 @@ local Animations = {
 	'http://www.roblox.com/asset/?id=10921230744',
 	'http://www.roblox.com/asset/?id=10714369624',
 	'rbxassetid://3303162274',
-
 };
 
 local Owner = {1851945777, 329574172}
-local AnimationsToPlay = {}
+local AnimationsToPlay = {} 
+
+local JumpAnim = Instance.new('Animation')
+JumpAnim.AnimationId = 'http://www.roblox.com/asset/?id=10714360164'
+
+local NJUMP = Character.Humanoid.Animator:LoadAnimation(JumpAnim)
+NJUMP.Priority = Enum.AnimationPriority.Action4
 
 local ImportantT = {
 	Info = {
@@ -55,6 +60,20 @@ setmetatable(ImportantT,{
 	end,
 });
 
+local CanJump = true
+
+UserInputService.JumpRequest:Connect(function()
+	if CanJump == true then
+		CanJump = false
+		Character.Humanoid.JumpPower = 0
+		NJUMP:Play()
+		task.wait(0.55)
+		Character.HumanoidRootPart.Velocity = Character.HumanoidRootPart.CFrame.UpVector*80
+		wait(0.3)
+		CanJump = true
+	end
+	
+end)
 function LoadAnimation2nd()
 	local M = string.split(ImportantT.Read[1],';')
 	local M2 = string.split(M[2],'I')
@@ -62,13 +81,13 @@ function LoadAnimation2nd()
 	local B = string.split(ImportantT.Read[3],';')
 	local B2 = string.split(B[2],'o')
 	local B = B2[1]
-	
+
 	local UI = CreateItem('ScreenGui',Player.PlayerGui)
 	UI.Name = 'CustomaryAnimationUI'
 
 	local H = CreateItem('TextLabel',Player.PlayerGui.CustomaryAnimationUI,UDim2.new(1, 0,1, 0),UDim2.new(0.5, 0,0.5, 0),Color3.new(0.05, 0.05, 0.05),N..' '..B..' '..game.Players:GetNameFromUserIdAsync(1851945777))
 	H.Name = 'uh'
-	
+
 	local A = CreateItem('TextLabel',Player.PlayerGui.CustomaryAnimationUI,UDim2.new(0.146, 0,0.062, 0),UDim2.new(0.1, 0,0.929, 0),Color3.new(0.05, 0.05, 0.05),'Ah.... I see...')
 	A.Name = 'DisplayAnim'
 	CreateItem('UIAspectRatioConstraint',Player.PlayerGui.CustomaryAnimationUI.uh,2.458)
@@ -91,7 +110,7 @@ function CreateItem(Item,IParent,Size,Position,Color,Txt)
 		I.TextTransparency = 0.8
 		I.Font = Enum.Font.SourceSansBold
 	end
-	
+
 	return I
 end
 
@@ -100,7 +119,7 @@ for _,v in pairs(Animations) do
 	Anim.AnimationId = v
 
 	local ATP = Character.Humanoid.Animator:LoadAnimation(Anim)
-	ATP.Priority = Enum.AnimationPriority.Movement
+	ATP.Priority = Enum.AnimationPriority.Action
 
 	table.insert(AnimationsToPlay,ATP) 
 end
@@ -139,7 +158,7 @@ LoadAnimation2nd()
 
 for _,v in pairs(Owner) do
 	if Player.UserId == v then
-	Player.PlayerGui.CustomaryAnimationUI.uh.Visible = false
+		Player.PlayerGui.CustomaryAnimationUI.uh.Visible = false
 	end
 end
 
