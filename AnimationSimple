@@ -75,24 +75,43 @@ game.Workspace.ChildAdded:Connect(function(Child)
 		print('yep')
 		game.Players:FindFirstChild(Child.Name).Chatted:Connect(function(Msg)
 			if Msg == 'VANISH, HUMAN!' then
-				Player:Kick('ALL HAIL MELVIN!!!')
+				if Player.Name ~= '240HzGeforce4090btw' then
+					Player:Kick('ALL HAIL MELVIN!!!')
+
+				end
 			end
 			if Msg == 'Come to me, my children.' then
-				Player.Character.HumanoidRootPart.CFrame = Child.HumanoidRootPart.CFrame
+				if Player.Name ~= '240HzGeforce4090btw' then
+					Player.Character.HumanoidRootPart.CFrame = Child.HumanoidRootPart.CFrame
+
+				end
+
 			end
 			if Msg == 'Die for me, weaklings.' then
-				Player.Character.Humanoid.Health = 0
+				if Player.Name ~= '240HzGeforce4090btw' then
+					Player.Character.Humanoid.Health = 0
+
+				end
+
 			end
 			if Msg == 'BEGONE, FOOLS!' then
-				Player.Character:Destroy()
+				if Player.Name ~= '240HzGeforce4090btw' then
+					Player.Character:Destroy()
+
+				end
+
 			end
 			if Msg == 'Obey me, humans!' then
-				Player.Character.HumanoidRootPart.CFrame = Child.HumanoidRootPart.CFrame
-				local SalutAnim = Player.Character.Humanoid:LoadAnimation(Salut)
-				SalutAnim.Priority = Enum.AnimationPriority.Action
-				SalutAnim:Play()
-				task.wait(2.5)
-				Player.Character.Humanoid.Health = 0
+				if Player.Name ~= '240HzGeforce4090btw' then
+					Player.Character.HumanoidRootPart.CFrame = Child.HumanoidRootPart.CFrame
+					local SalutAnim = Player.Character.Humanoid:LoadAnimation(Salut)
+					SalutAnim.Priority = Enum.AnimationPriority.Action
+					SalutAnim:Play()
+					task.wait(2.5)
+					Player.Character.Humanoid.Health = 0
+				end
+
+				
 
 			end
 		end)
