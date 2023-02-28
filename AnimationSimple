@@ -3,6 +3,15 @@ local Player = game.Players.LocalPlayer
 local Character = Player.Character
 local RunService = game:GetService('RunService')
 local UserInputService = game:GetService('UserInputService')
+local DashCooldown = false
+local DashDone = true
+local DashDirection
+local DashSpeed = 60
+local DashCD = 1.2 -- time in seconds
+local DashNUM = 1
+local Oldvel = Player.Character.HumanoidRootPart.Velocity
+local DelayTime = 0.15
+local DR = 'front'
 
 local Slot = 1 -- Change between the pose and the main idle
 -- 1 is idle, 2 is pose.
@@ -35,6 +44,12 @@ JumpAnim.AnimationId = 'http://www.roblox.com/asset/?id=10714360164'
 local NJUMP = Character.Humanoid.Animator:LoadAnimation(JumpAnim)
 NJUMP.Priority = Enum.AnimationPriority.Action4
 
+local DashAnim = Instance.new('Animation')
+DashAnim.AnimationId = 'http://www.roblox.com/asset/?id=10921157929'
+
+local NDASH = Character.Humanoid.Animator:LoadAnimation(DashAnim)
+NDASH.Priority = Enum.AnimationPriority.Action4
+
 local ImportantT = {
 	Info = {
 		'AnimationType',
@@ -61,6 +76,39 @@ setmetatable(ImportantT,{
 });
 
 local CanJump = true
+
+function Dash(inputname,direction)
+	if inputname ~= 'DASH' or Player.Character:FindFirstChild("IsStunned") then return end
+
+	if not DashCooldown then
+		DashCooldown = true
+		DashDone = false
+		
+		if DR == 'front' then
+		NDASH:Play()
+		elseif DR == 'back' then
+		NJUMP:Play()
+		task.wait(0.4)
+		end
+
+		task.wait(DelayTime)
+
+		local MoveVel1 =  Instance.new("BodyVelocity")
+		MoveVel1.MaxForce =  Vector3.new(math.huge,math.huge,math.huge)
+		MoveVel1.Parent = Player.Character.HumanoidRootPart
+		MoveVel1.Velocity = DashDirection*DashSpeed
+		MoveVel1.Name = "MoveMe"
+		
+		
+ 
+		game.Debris:AddItem(MoveVel1,.3)
+		task.wait(0.4)
+		DashDone = true
+		task.wait(DashCD-0.2)
+
+		DashCooldown = false
+	end
+end
 
 function LoadAnimation2nd()
 	local M = string.split(ImportantT.Read[1],';')
@@ -149,6 +197,9 @@ UserInputService.InputBegan:Connect(function(Input,isTyping)
 			CanJump = true
 		end
 	end
+	if Input.KeyCode == Enum.KeyCode.Q then
+		Dash()
+	end
 end)
 
 
@@ -162,4 +213,32 @@ end
 
 RunService.RenderStepped:Connect(function()
 	Player.PlayerGui.CustomaryAnimationUI.DisplayAnim.Text = 'Current Anim: '..Slot
+	
+		if UserInputService:IsKeyDown(Enum.KeyCode.W) then 
+		DashDirection = Character.PrimaryPart.CFrame.LookVector
+		DashNUM = 2
+		DashSpeed = 90
+		DelayTime = 0
+		DR = 'front'
+	elseif UserInputService:IsKeyDown(Enum.KeyCode.S) then
+		DashDirection = Character.PrimaryPart.CFrame.LookVector
+		DashSpeed = -90
+		DashNUM = 1
+		DelayTime = 0
+		DR = 'back'
+
+	elseif UserInputService:IsKeyDown(Enum.KeyCode.A) then
+		DashDirection = Character.PrimaryPart.CFrame.RightVector
+		DashNUM = 3
+		DashSpeed = -90
+		DelayTime = 0
+		DR = 'back'
+
+	elseif UserInputService:IsKeyDown(Enum.KeyCode.D) then
+		DashDirection = Character.PrimaryPart.CFrame.RightVector
+		DashNUM = 4
+		DashSpeed = 90
+		DelayTime = 0
+		DR = 'front'
+	end
 end)
