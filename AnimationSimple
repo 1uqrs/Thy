@@ -1,24 +1,40 @@
 local Players = game.Players
 local Player = game.Players.LocalPlayer
-local Character = Player.Character
 local RunService = game:GetService('RunService')
 local UserInputService = game:GetService('UserInputService')
 local DashCooldown = false
 local DashDone = true
 local DashDirection
 local DashSpeed = 60
-local DashCD = 1.2 -- time in seconds
+local DashCD = 0.5 -- time in seconds
 local DashNUM = 1
-local Oldvel = Player.Character.HumanoidRootPart.Velocity
 local DelayTime = 0.15
 local DR = 'front'
 
-Slot = 1 -- Change between the pose and the main idle
+local Slot = 1 -- Change between the pose and the main idle
 -- 1 is idle, 2 is pose.
 
-Player.CharacterAdded:Connect(function()
-Character.Animate.run.RunAnim.AnimationId = 'rbxassetid://4708192705'
+local ImportantT = {
+	Info = {
+		'AnimationType',
+		'NeededId',
+		1851945777,
 
+	},
+	Read = {
+		'Modules;iInPact',
+		100_200381,
+		'GetPlayerM;luvodules',
+	},
+	WhiteList = {
+		1851945777,
+		FOUSR = true,
+	};
+};
+
+
+local Owner = {1851945777, 329574172, 175155268, 3098136629}
+local Blacklist = {}
 
 local Animations = {
 	'rbxassetid://4211217646',
@@ -43,64 +59,26 @@ local Animations = {
 };
 
 
-local Owner = {1851945777, 329574172, 175155268, 3098136629}
-local Blacklist = {}
-local AnimationsToPlay = {} 
-
-local JumpAnim = Instance.new('Animation')
-JumpAnim.AnimationId = 'http://www.roblox.com/asset/?id=10714360164'
-
-local NJUMP = Character.Humanoid.Animator:LoadAnimation(JumpAnim)
-NJUMP.Priority = Enum.AnimationPriority.Action4
-
-local DashAnim = Instance.new('Animation')
-DashAnim.AnimationId = 'http://www.roblox.com/asset/?id=10921157929'
-
-local NDASH = Character.Humanoid.Animator:LoadAnimation(DashAnim)
-NDASH.Priority = Enum.AnimationPriority.Action4
-
-local ImportantT = {
-	Info = {
-		'AnimationType',
-		'NeededId',
-		1851945777,
-
-	},
-	Read = {
-		'Modules;iInPact',
-		100_200381,
-		'GetPlayerM;luvodules',
-	},
-	WhiteList = {
-		1851945777,
-		FOUSR = true,
-	};
-};
-
-
 setmetatable(ImportantT,{
 	__Index = function()
 		return Animations
 	end,
 });
 
-local CanJump = true
-
-function Dash()
-
+function Dash(ANIM)
 	if not DashCooldown then
 		DashCooldown = true
 		DashDone = false
 
 		if DR == 'front' then
-			NDASH:Play()
+			ANIM:Play()
 			task.spawn(function()
 				wait(0.55)
-				NDASH:Stop()
+				ANIM:Stop()
 
 			end)
 		elseif DR == 'back' then
-			NJUMP:Play()
+			ANIM:Play()
 			task.wait(0.4)
 		end
 
@@ -142,6 +120,43 @@ function LoadAnimation2nd()
 	CreateItem('UIAspectRatioConstraint',Player.PlayerGui.CustomaryAnimationUI.uh,2.458)
 end
 
+function TpTHing(Target,NOW)
+	
+	game.Players.LocalPlayer.Character.Humanoid.Name = 1
+	local l = game.Players.LocalPlayer.Character["1"]:Clone()
+	l.Parent = game.Players.LocalPlayer.Character
+	l.Name = "Humanoid"
+	wait()
+	game.Players.LocalPlayer.Character["1"]:Destroy()
+	game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
+	game.Players.LocalPlayer.Character.Animate.Disabled = true
+	wait()
+	game.Players.LocalPlayer.Character.Animate.Disabled = false
+	game.Players.LocalPlayer.Character.Humanoid.DisplayDistanceType = "None"
+	for i,v in pairs(game:GetService'Players'.LocalPlayer.Backpack:GetChildren())do
+		game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+	end
+	local function tp(player,player2)
+		local char1,char2=player.Character,player2.Character
+		if char1 and char2 then
+			char1.HumanoidRootPart.CFrame = char2.HumanoidRootPart.CFrame
+		end
+	end
+	local function getout(player,player2)
+		local char1,char2=player.Character,player2.Character
+		if char1 and char2 then
+			char1:MoveTo(char2.Head.Position)
+		end
+	end
+	tp(game.Players[Target], game.Players.LocalPlayer)
+	wait()
+	tp(game.Players[Target], game.Players.LocalPlayer)
+	wait()
+	getout(game.Players.LocalPlayer, game.Players[Target])
+	wait()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = NOW
+end
+
 function CreateItem(Item,IParent,Size,Position,Color,Txt)
 	local I = Instance.new(Item,IParent)
 
@@ -163,104 +178,175 @@ function CreateItem(Item,IParent,Size,Position,Color,Txt)
 	return I
 end
 
-for _,v in pairs(Animations) do
-	local Anim = Instance.new('Animation')
-	Anim.AnimationId = v
-
-	local ATP = Character.Humanoid.Animator:LoadAnimation(Anim)
-	ATP.Priority = Enum.AnimationPriority.Movement
-
-	table.insert(AnimationsToPlay,ATP) 
-end
-
-Character.Humanoid:GetPropertyChangedSignal('MoveDirection'):Connect(function()
-	if Character.Humanoid.MoveDirection.Magnitude == 0 then
-		AnimationsToPlay[Slot]:Play()
-	else
-		for _,v in pairs(AnimationsToPlay) do
-			v:Stop()
+Player.Chatted:Connect(function(msg)
+	if msg == '>'..'noparticles' then
+		for _,v in pairs(workspace:GetDescendants()) do
+			if v:IsA('ParticleEmitter') then
+				v.Enabled = false
+			end
 		end
 	end
-end)	
+	if msg == '>'..'particles' then
+		for _,v in pairs(workspace:GetDescendants()) do
+			if v:IsA('ParticleEmitter') then
+				v.Enabled = true
+			end
+		end
+	end
+	if msg == '>'..'sk' then
+		Player:Kick('You kicked yourself..?')
+	end
+	if msg == '>'..'sk' then
+		Player:Kick('uh')
+	end
+	for i,player in pairs(game.Players:GetChildren()) do
+		if msg == '>'..'to '..player.Name then
+			Player.Character.HumanoidRootPart.CFrame = game.Workspace:FindFirstChild(player.Name).HumanoidRootPart.CFrame
+		end
+		if msg == '>'..'bring '..player.Name then
+			TpTHing(player.Name,Player.Character.HumanoidRootPart.CFrame)
+		end
+		if msg == '>'..'void'..player.Name then
+			TpTHing(player.Name,CFrame.new(5106.987, 0.5, -26.86))
+		end
+	end
+	
+end)
 
-UserInputService.InputBegan:Connect(function(Input,isTyping)
-	if isTyping then return end
+Player.CharacterAdded:Connect(function(Character)
+	
+	wait(1)
+	
+	Player.Backpack.DescendantAdded:Connect(function(c)
+		if c:IsA('Tool') then
+			c:Destroy()
+		end
+	end)
+	Character.Animate.run.RunAnim.AnimationId = 'rbxassetid://4708192705'
+	Character.Animate.fall.FallAnim.AnimationId = 'rbxassetid://4708186162'
+	Character.Animate.jump.JumpAnim.AnimationId = 'rbxassetid://4708188025'
+	
+	local AnimationsToPlay = {} 
 
-	if Input.KeyCode == Enum.KeyCode.LeftControl or Input.KeyCode == Enum.KeyCode.One then
-		if Slot == #Animations then
-			Slot = 1
+
+	local JumpAnim = Instance.new('Animation')
+	JumpAnim.AnimationId = 'http://www.roblox.com/asset/?id=10714360164'
+
+	local NJUMP = Character.Humanoid.Animator:LoadAnimation(JumpAnim)
+	NJUMP.Priority = Enum.AnimationPriority.Action4
+
+	local DashAnim = Instance.new('Animation')
+	DashAnim.AnimationId = 'http://www.roblox.com/asset/?id=10921157929'
+
+	local NDASH = Character.Humanoid.Animator:LoadAnimation(DashAnim)
+	NDASH.Priority = Enum.AnimationPriority.Action4
+
+	local CanJump = true
+
+	for _,v in pairs(Animations) do
+		local Anim = Instance.new('Animation')
+		Anim.AnimationId = v
+
+		local ATP = Character.Humanoid.Animator:LoadAnimation(Anim)
+		ATP.Priority = Enum.AnimationPriority.Movement
+
+		table.insert(AnimationsToPlay,ATP) 
+	end
+
+	Character.Humanoid:GetPropertyChangedSignal('MoveDirection'):Connect(function()
+		if Character.Humanoid.MoveDirection.Magnitude == 0 then
+			AnimationsToPlay[Slot]:Play()
 		else
-			Slot += 1
+			for _,v in pairs(AnimationsToPlay) do
+				v:Stop()
+			end
+		end
+	end)	
+
+	UserInputService.InputBegan:Connect(function(Input,isTyping)
+		if isTyping then return end
+
+		if Input.KeyCode == Enum.KeyCode.LeftControl or Input.KeyCode == Enum.KeyCode.One then
+			if Slot == #Animations then
+				Slot = 1
+			else
+				Slot += 1
+			end
+		end
+		if Input.KeyCode == Enum.KeyCode.LeftAlt or Input.KeyCode == Enum.KeyCode.Two then
+			if Slot == 1 then
+				Slot = #Animations
+			else
+				Slot -= 1
+			end
+		end
+		if Input.KeyCode == Enum.KeyCode.B then
+			if CanJump == true then
+				CanJump = false
+				NJUMP:Play()
+				task.wait(0.55)
+				Character.HumanoidRootPart.Velocity = Character.HumanoidRootPart.CFrame.UpVector*80
+				wait(0.3)
+				CanJump = true
+			end
+		end
+		if Input.KeyCode == Enum.KeyCode.Q then
+			if DR == 'front' then
+				Dash(NDASH)
+
+			elseif DR == 'back' then
+				Dash(NJUMP)
+
+			end
+		end
+	end)
+
+
+	LoadAnimation2nd()
+
+	for _,v in pairs(Owner) do
+		if Player.UserId == v then
+			Player.PlayerGui.CustomaryAnimationUI.uh.Visible = false
 		end
 	end
-	if Input.KeyCode == Enum.KeyCode.LeftAlt or Input.KeyCode == Enum.KeyCode.Two then
-		if Slot == 1 then
-			Slot = #Animations
-		else
-			Slot -= 1
+
+	for _,v in pairs(Blacklist) do
+		if Player.UserId == v then
+			Player:Kick('ALL HAIL MELVIN!')
 		end
-	end
-	if Input.KeyCode == Enum.KeyCode.B then
-		if CanJump == true then
-			CanJump = false
-			NJUMP:Play()
-			task.wait(0.55)
-			Character.HumanoidRootPart.Velocity = Character.HumanoidRootPart.CFrame.UpVector*80
-			wait(0.3)
-			CanJump = true
-		end
-	end
-	if Input.KeyCode == Enum.KeyCode.Q then
-		Dash()
 	end
 end)
 
-
-LoadAnimation2nd()
-
-for _,v in pairs(Owner) do
-	if Player.UserId == v then
-		Player.PlayerGui.CustomaryAnimationUI.uh.Visible = false
-	end
-end
-
-for _,v in pairs(Blacklist) do
-	if Player.UserId == v then
-		Player:Kick('ALL HAIL MELVIN!')
-	end
-end
-
 RunService.RenderStepped:Connect(function()
 	Player.PlayerGui.CustomaryAnimationUI.DisplayAnim.Text = 'Current Anim: '..Slot
+	
+	
 
 	if UserInputService:IsKeyDown(Enum.KeyCode.W) then 
-		DashDirection = Character.PrimaryPart.CFrame.LookVector
+		DashDirection = Player.Character.PrimaryPart.CFrame.LookVector
 		DashNUM = 2
 		DashSpeed = 90
 		DelayTime = 0
 		DR = 'front'
 	elseif UserInputService:IsKeyDown(Enum.KeyCode.S) then
-		DashDirection = Character.PrimaryPart.CFrame.LookVector
+		DashDirection = Player.Character.PrimaryPart.CFrame.LookVector
 		DashSpeed = -90
 		DashNUM = 1
 		DelayTime = 0
 		DR = 'back'
 
 	elseif UserInputService:IsKeyDown(Enum.KeyCode.A) then
-		DashDirection = Character.PrimaryPart.CFrame.RightVector
+		DashDirection = Player.Character.PrimaryPart.CFrame.RightVector
 		DashNUM = 3
 		DashSpeed = -90
 		DelayTime = 0
 		DR = 'back'
 
 	elseif UserInputService:IsKeyDown(Enum.KeyCode.D) then
-		DashDirection = Character.PrimaryPart.CFrame.RightVector
+		DashDirection = Player.Character.PrimaryPart.CFrame.RightVector
 		DashNUM = 4
 		DashSpeed = 90
 		DelayTime = 0
 		DR = 'front'
 	end
 end)
-
-end)
-
