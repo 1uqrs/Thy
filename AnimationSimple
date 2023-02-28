@@ -77,8 +77,7 @@ setmetatable(ImportantT,{
 
 local CanJump = true
 
-function Dash(inputname,direction)
-	if inputname ~= 'DASH' or Player.Character:FindFirstChild("IsStunned") then return end
+function Dash()
 
 	if not DashCooldown then
 		DashCooldown = true
@@ -86,6 +85,11 @@ function Dash(inputname,direction)
 
 		if DR == 'front' then
 			NDASH:Play()
+			task.spawn(function()
+				wait(0.55)
+				NDASH:Stop()
+
+			end)
 		elseif DR == 'back' then
 			NJUMP:Play()
 			task.wait(0.4)
