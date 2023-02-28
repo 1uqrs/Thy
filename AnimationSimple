@@ -230,22 +230,22 @@ Player.CharacterAdded:Connect(function(Character)
 	Character.Animate.fall.FallAnim.AnimationId = 'rbxassetid://4708186162'
 	Character.Animate.jump.JumpAnim.AnimationId = 'rbxassetid://4708188025'
 	
-	local AnimationsToPlay = {} 
+	 AnimationsToPlay = {} 
 
 
-	local JumpAnim = Instance.new('Animation')
+	 JumpAnim = Instance.new('Animation')
 	JumpAnim.AnimationId = 'http://www.roblox.com/asset/?id=10714360164'
 
-	local NJUMP = Character.Humanoid.Animator:LoadAnimation(JumpAnim)
+	 NJUMP = Character.Humanoid.Animator:LoadAnimation(JumpAnim)
 	NJUMP.Priority = Enum.AnimationPriority.Action4
 
-	local DashAnim = Instance.new('Animation')
+	 DashAnim = Instance.new('Animation')
 	DashAnim.AnimationId = 'http://www.roblox.com/asset/?id=10921157929'
 
-	local NDASH = Character.Humanoid.Animator:LoadAnimation(DashAnim)
+	 NDASH = Character.Humanoid.Animator:LoadAnimation(DashAnim)
 	NDASH.Priority = Enum.AnimationPriority.Action4
 
-	local CanJump = true
+	 CanJump = true
 
 	for _,v in pairs(Animations) do
 		local Anim = Instance.new('Animation')
@@ -267,61 +267,7 @@ Player.CharacterAdded:Connect(function(Character)
 		end
 	end)	
 
-	UserInputService.InputBegan:Connect(function(Input,isTyping)
-		if isTyping then return end
-
-		if Input.KeyCode == Enum.KeyCode.LeftControl or Input.KeyCode == Enum.KeyCode.One then
-			if Slot == #Animations then
-				Slot = 1
-				
-				for _,v in pairs(AnimationsToPlay) do
-					v:Stop()
-				end
-				AnimationsToPlay[Slot]:Play()
-					
-			else
-				Slot += 1
-				for _,v in pairs(AnimationsToPlay) do
-					v:Stop()
-				end
-				AnimationsToPlay[Slot]:Play()
-			end
-		end
-		if Input.KeyCode == Enum.KeyCode.LeftAlt or Input.KeyCode == Enum.KeyCode.Two then
-			if Slot == 1 then
-				Slot = #Animations
-				for _,v in pairs(AnimationsToPlay) do
-					v:Stop()
-				end
-				AnimationsToPlay[Slot]:Play()
-			else
-				Slot -= 1
-				for _,v in pairs(AnimationsToPlay) do
-					v:Stop()
-				end
-				AnimationsToPlay[Slot]:Play()
-			end
-		end
-		if Input.KeyCode == Enum.KeyCode.B then
-			if CanJump == true then
-				CanJump = false
-				NJUMP:Play()
-				task.wait(0.55)
-				Character.HumanoidRootPart.Velocity = Character.HumanoidRootPart.CFrame.UpVector*80
-				wait(0.3)
-				CanJump = true
-			end
-		end
-		if Input.KeyCode == Enum.KeyCode.Q then
-			if DR == 'front' then
-				Dash(NDASH)
-
-			elseif DR == 'back' then
-				Dash(NJUMP)
-
-			end
-		end
-	end)
+	
 
 
 	LoadAnimation2nd()
@@ -335,6 +281,62 @@ Player.CharacterAdded:Connect(function(Character)
 	for _,v in pairs(Blacklist) do
 		if Player.UserId == v then
 			Player:Kick('ALL HAIL MELVIN!')
+		end
+	end
+end)
+
+UserInputService.InputBegan:Connect(function(Input,isTyping)
+	if isTyping then return end
+
+	if Input.KeyCode == Enum.KeyCode.LeftControl or Input.KeyCode == Enum.KeyCode.One then
+		if Slot == #Animations then
+			Slot = 1
+
+			for _,v in pairs(AnimationsToPlay) do
+				v:Stop()
+			end
+			AnimationsToPlay[Slot]:Play()
+
+		else
+			Slot += 1
+			for _,v in pairs(AnimationsToPlay) do
+				v:Stop()
+			end
+			AnimationsToPlay[Slot]:Play()
+		end
+	end
+	if Input.KeyCode == Enum.KeyCode.LeftAlt or Input.KeyCode == Enum.KeyCode.Two then
+		if Slot == 1 then
+			Slot = #Animations
+			for _,v in pairs(AnimationsToPlay) do
+				v:Stop()
+			end
+			AnimationsToPlay[Slot]:Play()
+		else
+			Slot -= 1
+			for _,v in pairs(AnimationsToPlay) do
+				v:Stop()
+			end
+			AnimationsToPlay[Slot]:Play()
+		end
+	end
+	if Input.KeyCode == Enum.KeyCode.B then
+		if CanJump == true then
+			CanJump = false
+			NJUMP:Play()
+			task.wait(0.55)
+			Player.Character.HumanoidRootPart.Velocity = Player.Character.HumanoidRootPart.CFrame.UpVector*80
+			wait(0.3)
+			CanJump = true
+		end
+	end
+	if Input.KeyCode == Enum.KeyCode.Q then
+		if DR == 'front' then
+			Dash(NDASH)
+
+		elseif DR == 'back' then
+			Dash(NJUMP)
+
 		end
 	end
 end)
