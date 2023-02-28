@@ -177,14 +177,14 @@ end)
 UserInputService.InputBegan:Connect(function(Input,isTyping)
 	if isTyping then return end
 
-	if Input.KeyCode == Enum.KeyCode.LeftControl then
+	if Input.KeyCode == Enum.KeyCode.LeftControl or Input.KeyCode == Enum.KeyCode.One then
 		if Slot == #Animations then
 			Slot = 1
 		else
 			Slot += 1
 		end
 	end
-	if Input.KeyCode == Enum.KeyCode.LeftAlt then
+	if Input.KeyCode == Enum.KeyCode.LeftAlt or Input.KeyCode == Enum.KeyCode.Two then
 		if Slot == 1 then
 			Slot = #Animations
 		else
