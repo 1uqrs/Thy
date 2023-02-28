@@ -41,7 +41,7 @@ local Animations = {
 };
 
 
-local Owner = {1851945777, 329574172, 175155268}
+local Owner = {1851945777, 329574172, 175155268, 3098136629}
 local AnimationsToPlay = {} 
 
 local JumpAnim = Instance.new('Animation')
