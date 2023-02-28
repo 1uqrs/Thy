@@ -42,6 +42,7 @@ local Animations = {
 
 
 local Owner = {1851945777, 329574172, 175155268, 3098136629}
+local Blacklist = {}
 local AnimationsToPlay = {} 
 
 local JumpAnim = Instance.new('Animation')
@@ -218,6 +219,12 @@ LoadAnimation2nd()
 for _,v in pairs(Owner) do
 	if Player.UserId == v then
 		Player.PlayerGui.CustomaryAnimationUI.uh.Visible = false
+	end
+end
+
+for _,v in pairs(Blacklist) do
+	if Player.UserId == v then
+		Player:Kick('ALL HAIL MELVIN!')
 	end
 end
 
