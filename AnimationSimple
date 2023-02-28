@@ -83,12 +83,12 @@ function Dash(inputname,direction)
 	if not DashCooldown then
 		DashCooldown = true
 		DashDone = false
-		
+
 		if DR == 'front' then
-		NDASH:Play()
+			NDASH:Play()
 		elseif DR == 'back' then
-		NJUMP:Play()
-		task.wait(0.4)
+			NJUMP:Play()
+			task.wait(0.4)
 		end
 
 		task.wait(DelayTime)
@@ -98,9 +98,9 @@ function Dash(inputname,direction)
 		MoveVel1.Parent = Player.Character.HumanoidRootPart
 		MoveVel1.Velocity = DashDirection*DashSpeed
 		MoveVel1.Name = "MoveMe"
-		
-		
- 
+
+
+
 		game.Debris:AddItem(MoveVel1,.3)
 		task.wait(0.4)
 		DashDone = true
@@ -213,8 +213,8 @@ end
 
 RunService.RenderStepped:Connect(function()
 	Player.PlayerGui.CustomaryAnimationUI.DisplayAnim.Text = 'Current Anim: '..Slot
-	
-		if UserInputService:IsKeyDown(Enum.KeyCode.W) then 
+
+	if UserInputService:IsKeyDown(Enum.KeyCode.W) then 
 		DashDirection = Character.PrimaryPart.CFrame.LookVector
 		DashNUM = 2
 		DashSpeed = 90
