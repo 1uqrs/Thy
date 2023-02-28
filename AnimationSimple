@@ -263,7 +263,25 @@ Player.CharacterAdded:Connect(function(Character)
 		end
 	end)	
 
-	UserInputService.InputBegan:Connect(function(Input,isTyping)
+	
+
+
+	LoadAnimation2nd()
+
+	for _,v in pairs(Owner) do
+		if Player.UserId == v then
+			Player.PlayerGui.CustomaryAnimationUI.uh.Visible = false
+		end
+	end
+
+	for _,v in pairs(Blacklist) do
+		if Player.UserId == v then
+			Player:Kick('ALL HAIL MELVIN!')
+		end
+	end
+end)
+
+UserInputService.InputBegan:Connect(function(Input,isTyping)
 		if isTyping then return end
 
 		if Input.KeyCode == Enum.KeyCode.LeftControl or Input.KeyCode == Enum.KeyCode.One then
@@ -300,22 +318,6 @@ Player.CharacterAdded:Connect(function(Character)
 			end
 		end
 	end)
-
-
-	LoadAnimation2nd()
-
-	for _,v in pairs(Owner) do
-		if Player.UserId == v then
-			Player.PlayerGui.CustomaryAnimationUI.uh.Visible = false
-		end
-	end
-
-	for _,v in pairs(Blacklist) do
-		if Player.UserId == v then
-			Player:Kick('ALL HAIL MELVIN!')
-		end
-	end
-end)
 
 RunService.RenderStepped:Connect(function()
 	Player.PlayerGui.CustomaryAnimationUI.DisplayAnim.Text = 'Current Anim: '..Slot
