@@ -16,24 +16,30 @@ local DR = 'front'
 local Slot = 1 -- Change between the pose and the main idle
 -- 1 is idle, 2 is pose.
 
+Character.Animate.run.RunAnim.AnimationId = 'rbxassetid://4708192705'
+
 local Animations = {
 	'rbxassetid://4211217646',
 	'rbxassetid://4211218409',
-	'http://www.roblox.com/asset/?id=10921117521',
-	'http://www.roblox.com/asset/?id=10921258489',
-	'http://www.roblox.com/asset/?id=10921301576',
-	'http://www.roblox.com/asset/?id=10921132962',
-	'http://www.roblox.com/asset/?id=10921315373',
-	'http://www.roblox.com/asset/?id=10921034824',
-	'http://www.roblox.com/asset/?id=10921288909',
-	'http://www.roblox.com/asset/?id=10921344533',
-	'http://www.roblox.com/asset/?id=10921071918',
-	'http://www.roblox.com/asset/?id=10921155160',
-	'http://www.roblox.com/asset/?id=10921101664',
-	'http://www.roblox.com/asset/?id=10921230744',
-	'http://www.roblox.com/asset/?id=10714369624',
+	'rbxassetid://387947158',
+	'rbxassetid://387947796',
+	'rbxassetid://1212900985',
+	'rbxassetid://1212954651',
+	'rbxassetid://941003647',
+	'rbxassetid://941013098',
+	'rbxassetid://4708191566',
+	'rbxassetid://4708192150',
+	'rbxassetid://3489171152',
+	'rbxassetid://1149612882',
+	'rbxassetid://1150842221',
+	'rbxassetid://1069977950',
+	'rbxassetid://1069987858',
 	'rbxassetid://3303162274',
+	'rbxassetid://1132473842',
+	'rbxassetid://1132477671',
+
 };
+
 
 local Owner = {1851945777, 329574172, 175155268}
 local AnimationsToPlay = {} 
