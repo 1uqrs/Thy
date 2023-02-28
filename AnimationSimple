@@ -13,10 +13,12 @@ local Oldvel = Player.Character.HumanoidRootPart.Velocity
 local DelayTime = 0.15
 local DR = 'front'
 
-local Slot = 1 -- Change between the pose and the main idle
+Slot = 1 -- Change between the pose and the main idle
 -- 1 is idle, 2 is pose.
 
+Player.CharacterAdded:Connect(function()
 Character.Animate.run.RunAnim.AnimationId = 'rbxassetid://4708192705'
+
 
 local Animations = {
 	'rbxassetid://4211217646',
@@ -259,3 +261,6 @@ RunService.RenderStepped:Connect(function()
 		DR = 'front'
 	end
 end)
+
+end)
+
