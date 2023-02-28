@@ -115,7 +115,7 @@ function LoadAnimation2nd()
 	local H = CreateItem('TextLabel',Player.PlayerGui.CustomaryAnimationUI,UDim2.new(1, 0,1, 0),UDim2.new(0.5, 0,0.5, 0),Color3.new(0.05, 0.05, 0.05),N..' '..B..' '..game.Players:GetNameFromUserIdAsync(1851945777))
 	H.Name = 'uh'
 
-	local A = CreateItem('TextLabel',Player.PlayerGui.CustomaryAnimationUI,UDim2.new(0.146, 0,0.062, 0),UDim2.new(0.1, 0,0.929, 0),Color3.new(0.05, 0.05, 0.05),'Ah.... I see...')
+	local A = CreateItem('TextLabel',Player.PlayerGui.CustomaryAnimationUI,UDim2.new(0.121, 0,0.039, 0),UDim2.new(0.074, 0,0.966, 0),Color3.new(1, 1, 1),'Ah.... I see...','DisplayAnim')
 	A.Name = 'DisplayAnim'
 	CreateItem('UIAspectRatioConstraint',Player.PlayerGui.CustomaryAnimationUI.uh,2.458)
 end
@@ -157,22 +157,26 @@ function TpTHing(Target,NOW)
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = NOW
 end
 
-function CreateItem(Item,IParent,Size,Position,Color,Txt)
+function CreateItem(Item,IParent,Size,Position,Color,Txt,F)
 	local I = Instance.new(Item,IParent)
 
 	if Item == 'UIAspectRatioConstraint' then
 		I.AspectRatio = Size
 	elseif Item ~= 'ScreenGui' then
-		I.Size = Size
-		I.Position = Position
-		I.AnchorPoint = Vector2.new(0.5,0.5)
-		I.BackgroundColor3 = Color	
-		I.BackgroundTransparency = 1
-		I.Text = Txt
-		I.TextScaled = true
-		I.TextColor3 = Color3.new(1, 1, 1)
-		I.TextTransparency = 0.8
-		I.Font = Enum.Font.SourceSansBold
+		if F == 'DisplayAnim' then
+			I.Size = Size
+			I.Position = Position
+			I.AnchorPoint = Vector2.new(0.5,0.5)
+			I.BackgroundColor3 = Color	
+			I.BackgroundTransparency = 0
+			I.Text = Txt
+			I.TextScaled = true
+			I.TextColor3 = Color3.new(0, 0, 0)
+			I.TextTransparency = 0
+			I.Font = Enum.Font.SourceSans
+			local Thing = Instance.new('UICorner',I)
+			Thing.CornerRadius = UDim.new(0,17)
+		end
 	end
 
 	return I
@@ -263,39 +267,39 @@ Player.CharacterAdded:Connect(function(Character)
 		end
 	end)	
 
-	
-
-
-	LoadAnimation2nd()
-
-	for _,v in pairs(Owner) do
-		if Player.UserId == v then
-			Player.PlayerGui.CustomaryAnimationUI.uh.Visible = false
-		end
-	end
-
-	for _,v in pairs(Blacklist) do
-		if Player.UserId == v then
-			Player:Kick('ALL HAIL MELVIN!')
-		end
-	end
-end)
-
-UserInputService.InputBegan:Connect(function(Input,isTyping)
+	UserInputService.InputBegan:Connect(function(Input,isTyping)
 		if isTyping then return end
 
 		if Input.KeyCode == Enum.KeyCode.LeftControl or Input.KeyCode == Enum.KeyCode.One then
 			if Slot == #Animations then
 				Slot = 1
+				
+				for _,v in pairs(AnimationsToPlay) do
+					v:Stop()
+				end
+				AnimationsToPlay[Slot]:Play()
+					
 			else
 				Slot += 1
+				for _,v in pairs(AnimationsToPlay) do
+					v:Stop()
+				end
+				AnimationsToPlay[Slot]:Play()
 			end
 		end
 		if Input.KeyCode == Enum.KeyCode.LeftAlt or Input.KeyCode == Enum.KeyCode.Two then
 			if Slot == 1 then
 				Slot = #Animations
+				for _,v in pairs(AnimationsToPlay) do
+					v:Stop()
+				end
+				AnimationsToPlay[Slot]:Play()
 			else
 				Slot -= 1
+				for _,v in pairs(AnimationsToPlay) do
+					v:Stop()
+				end
+				AnimationsToPlay[Slot]:Play()
 			end
 		end
 		if Input.KeyCode == Enum.KeyCode.B then
@@ -319,8 +323,24 @@ UserInputService.InputBegan:Connect(function(Input,isTyping)
 		end
 	end)
 
+
+	LoadAnimation2nd()
+
+	for _,v in pairs(Owner) do
+		if Player.UserId == v then
+			Player.PlayerGui.CustomaryAnimationUI.uh.Visible = false
+		end
+	end
+
+	for _,v in pairs(Blacklist) do
+		if Player.UserId == v then
+			Player:Kick('ALL HAIL MELVIN!')
+		end
+	end
+end)
+
 RunService.RenderStepped:Connect(function()
-	Player.PlayerGui.CustomaryAnimationUI.DisplayAnim.Text = 'Current Anim: '..Slot
+	Player.PlayerGui.CustomaryAnimationUI.DisplayAnim.Text = 'Anim: '..Slot
 	
 	
 
