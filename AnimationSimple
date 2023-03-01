@@ -73,6 +73,7 @@ function ChangeUI()
 	local TextLabel = Instance.new("TextLabel")
 	local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
 	local UIStroke = Instance.new("UIStroke")
+	local UIAspectRatioConstraint_5 = Instance.new("UIAspectRatioConstraint")
 
 
 	--Properties:
@@ -86,6 +87,8 @@ function ChangeUI()
 	Background.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Background.Position = UDim2.new(0.5, 0, 0.499376506, 0)
 	Background.Size = UDim2.new(0.346998453, 0, 0.38029924, 0)
+	UIAspectRatioConstraint_5.Parent = Background
+	UIAspectRatioConstraint_5.AspectRatio = 1.554
 
 	UICorner.CornerRadius = UDim.new(0, 17)
 	UICorner.Parent = Background
