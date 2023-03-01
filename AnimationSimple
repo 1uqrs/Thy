@@ -122,7 +122,7 @@ function ChangeUI()
 	Close.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Close.BackgroundTransparency = 1.000
 	Close.Position = UDim2.new(0.949000001, 0, 0.075000003, 0)
-	Close.Size = UDim2.new(0.0780590922, 0, 0.121311478, 0)
+	Close.Size = UDim2.new(0.2780590922, 0, 0.221311478, 0)
 	Close.Font = Enum.Font.Unknown
 	Close.Text = "-"
 	Close.TextColor3 = Color3.fromRGB(255, 255, 255)
