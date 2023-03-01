@@ -385,6 +385,8 @@ setmetatable(ImportantT,{
 	end,
 });
 
+
+
 task.spawn(function()
 	repeat wait() until workspace:FindFirstChild(Player.Name)
 	Player.Character:BreakJoints()
@@ -592,7 +594,7 @@ Player.CharacterAdded:Connect(function(Character)
 		Anim.AnimationId = v
 
 		local ATP = Character.Humanoid.Animator:LoadAnimation(Anim)
-		ATP.Priority = Enum.AnimationPriority.Movement
+		ATP.Priority = Enum.AnimationPriority.Idle
 
 		table.insert(AnimationsToPlay,ATP) 
 	end
@@ -606,9 +608,6 @@ Player.CharacterAdded:Connect(function(Character)
 			end
 		end
 	end)	
-
-	
-
 
 	LoadAnimation2nd()
 
@@ -714,3 +713,14 @@ RunService.RenderStepped:Connect(function()
 		DR = 'front'
 	end
 end)
+
+UserInputService.JumpRequest:Connect(function()
+	for _,v in pairs(AnimationsToPlay) do
+		v:Stop()
+	end
+	repeat wait() until Player.Character.Humanoid:GetState() == Enum.HumanoidStateType.Landed
+	AnimationsToPlay[Slot]:Play()
+
+end)
+
+
